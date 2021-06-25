@@ -1,0 +1,208 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*************************************
+* Dapp styles
+*************************************/
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✨</text></svg>") 16 0,
+    auto;
+}
+h2{
+  padding: 20px 0 40px;
+}
+
+.truncat-text {
+  width: 100%;
+  min-height: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container-nav {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.connect-btn {
+  width: 226px;
+  height: 56px;
+  background-color: rgba(196, 196, 196, 0.38);
+  border-radius: 10px;
+  border: 1px solid #C6C6C6;
+
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 400;
+}
+
+/*************************************
+* Wallet UI
+*************************************/
+.wallet-ui {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.address-style {
+  text-transform: lowercase;
+}
+
+/*************************************
+* Network
+*************************************/
+
+.network-ui {
+  width: 30%;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.network-content {
+  min-width: 250px;
+  border: solid 1px #000;
+  padding: 15px;
+}
+
+/*************************************
+* Send UI
+*************************************/
+.send-ui {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+td {
+  height: 60px;
+  white-space: nowrap;
+}
+
+.label-group {
+  width: 30%;
+  padding: 10px 0;
+}
+
+input {
+  width: 100%;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.button-send {
+  width: 160px;
+  height: 40px;
+  margin-top: 20px;
+  background-color: rgba(196, 196, 196, 0.38);
+  border-radius: 10px;
+  border: 1px solid #C6C6C6;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.button-send:hover {
+  background-color: #C6C6C6;
+  border-radius: 10px;
+  border: 1px solid rgba(196, 196, 196, 0.38);
+}
+
+.group-send-btn{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/*************************************
+* Responsive
+*************************************/
+
+@media screen and (max-width: 912px) {
+  .container {
+    height: 100vh;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .wallet-ui,
+  .network-ui,
+  .send-ui {
+    width: 100%;
+    text-align: center;
+  }
+
+  .network-ui {
+    justify-content: center;
+  }
+
+  .send-ui {
+    align-items: center;
+  }
+}
