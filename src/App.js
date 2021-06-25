@@ -58,7 +58,7 @@ function App() {
         try {
           await window.ethereum.request({ method: 'eth_requestAccounts' })
           setIsConnectedWeb3(true)
-          // window.location.reload()
+          window.location.reload()
           success("Connected to wallet !")
         } catch (err) {
           danger("Ouch something went wrong !", 8000)
