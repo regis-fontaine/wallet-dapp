@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import Loader from "react-loader-spinner"
 import Abi from '../contracts/wcstoken.json'
 import ethContract from "web3-eth-contract"
@@ -28,27 +28,6 @@ const WcsToken = ({ web3Provider, explorer }) => {
         ethContract.setProvider(web3)
         return await new ethContract(Abi, input)
     }
-
-    // const getName = () => {
-    //     //Get Name - Call
-    //     contract.methods.name().call({}).then(res => {
-    //         setWcsTokenName(res)
-    //     })
-    // }
-
-    // const getSymbol = () => {
-    //     //Get Symbol- Call
-    //     contract.methods.symbol().call({}).then(res => {
-    //         setWcsTokenSymbol(res)
-    //     })
-    // }
-
-    // const getBalance = () => {
-    //     //Get Balance- Call
-    //     contract.methods.balanceOf(web3.eth.defaultAccount).call({ from: web3.eth.defaultAccount })
-    //         .then(res => { setBalanceRegWCS(web3.utils.fromWei(res)) })
-    // }
-
     // WCS token Contract 
     // 0xbc6f1fbED5976D11990363918A762888d722cB56
     const [validationAddress, setValidationAddress] = useState(false);
