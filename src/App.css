@@ -179,13 +179,40 @@ input {
   align-items: flex-end;
 }
 
+.wcs-token-ui{
+padding-top: 40px;
+}
+
+.wcs-td{
+  white-space: normal;
+}
+
+.button-verify {
+  width: 160px;
+  height: 40px;
+  margin-top: 20px;
+  background-color: rgba(196, 196, 196, 0.38);
+  border-radius: 10px;
+  border: 1px solid #C6C6C6;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+
+.button-verify:hover {
+  background-color: #C6C6C6;
+  border-radius: 10px;
+  border: 1px solid rgba(196, 196, 196, 0.38);
+}
+
+
 /*************************************
 * Responsive
 *************************************/
 
 @media screen and (max-width: 912px) {
   .container {
-    height: 100vh;
+    /* height: 100vh; */
     flex-direction: column-reverse;
     justify-content: space-around;
     align-items: center;

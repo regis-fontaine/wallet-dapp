@@ -1,13 +1,15 @@
 // import logo from './logo.svg';
-import './App.css';
-import React, { useCallback, useEffect, useState } from "react";
-import Web3 from "web3";
-import Chains from './chains/chains.json';
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.min.css';
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from "react-loader-spinner";
+import './App.css'
+import React, { useCallback, useEffect, useState } from "react"
+import 'react-toastify/dist/ReactToastify.min.css'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { ToastContainer } from "react-toastify"
+import { info, success, danger } from "./utils/toast"
 
+import Web3 from "web3"
+import Chains from './chains/chains.json'
+import Loader from "react-loader-spinner"
+import WcsToken from "./components/WcsToken";
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
   const [balance, setBalance] = useState(0)
   const [network, setNetwork] = useState({})
   const [web3] = useState(new Web3(Web3.givenProvider || "ws://localhost:8545"))
+  const [explorerAddress, setExplorerAddress] = useState("")
   const [tx, setTx] = useState({
     from: "",
     to: "",
@@ -30,24 +33,6 @@ function App() {
     name: "",
     symbol: ""
   })
-  const [explorerAddress, setExplorerAddress] = useState("")
-  // Toast
-  const success = (data) => {
-    toast.success(data, {});
-  }
-
-  const info = (data, time) => {
-    toast.info(data, {
-      autoClose: time
-    });
-  }
-
-  const danger = (data, time) => {
-    toast.error(data, {
-      autoClose: time
-    });
-  }
-
   /**
    * @function connectToWeb3() 
    * @description Make the first connection with the wallet
@@ -58,7 +43,7 @@ function App() {
         try {
           await window.ethereum.request({ method: 'eth_requestAccounts' })
           setIsConnectedWeb3(true)
-          window.location.reload()
+          // window.location.reload()
           success("Connected to wallet !")
         } catch (err) {
           danger("Ouch something went wrong !", 8000)
@@ -249,7 +234,7 @@ function App() {
             })
             .on('transactionHash', (hash) => {
               // Then => update txHash and show
-              setTx({txHash:hash}) 
+              setTx({ txHash: hash })
               info("Tx Hash is here !", 8000)
             })
             .on('receipt', (receipt) => {
@@ -262,7 +247,7 @@ function App() {
                 info("Transaction has been confirmed !", 8000)
               }
             })
-            // .on('error', danger("🤷‍♀️ Something went wrong !", 8000))
+          // .on('error', danger("🤷‍♀️ Something went wrong !", 8000))
 
         } catch (error) {
           // console.log(error)
@@ -281,20 +266,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       <ToastContainer position="bottom-center"
         autoClose={8000}
         hideProgressBar={false}
@@ -371,13 +342,14 @@ function App() {
                         (tx.txHash.length > 0)
                         &&
                         <a href={explorerAddress + "/tx/" + tx.txHash}
-                        target="_blank"
-                        rel="noreferrer"
+                          target="_blank"
+                          rel="noreferrer"
                         >
-                        <p>Show transaction: {tx.txHash}</p>
+                          <p>Show transaction: {tx.txHash}</p>
                         </a>
                       }
                     </div>
+                    <WcsToken web3Provider={web3} explorer={explorerAddress} />
                   </div>
 
                   <div className="network-ui">
