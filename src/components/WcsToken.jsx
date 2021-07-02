@@ -43,11 +43,12 @@ const WcsToken = ({ web3Provider, explorer }) => {
     //     })
     // }
 
-    const getBalance = () => {
-        //Get Balance- Call
-        contract.methods.balanceOf(web3.eth.defaultAccount).call({ from: web3.eth.defaultAccount })
-            .then(res => { setBalanceRegWCS(web3.utils.fromWei(res)) })
-    }
+    // const getBalance = () => {
+    //     //Get Balance- Call
+    //     contract.methods.balanceOf(web3.eth.defaultAccount).call({ from: web3.eth.defaultAccount })
+    //         .then(res => { setBalanceRegWCS(web3.utils.fromWei(res)) })
+    // }
+
     // WCS token Contract 
     // 0xbc6f1fbED5976D11990363918A762888d722cB56
     const [validationAddress, setValidationAddress] = useState(false);
@@ -55,23 +56,21 @@ const WcsToken = ({ web3Provider, explorer }) => {
         // Check if the length and the type are good
         if (input && input.length === 42 && web3.utils.isAddress(input)) {
             setValidationAddress(true)
-            if (validationAddress) {
-                try {
-                    getContract().then((res) => {
-                        setContract(res)
-                        res.methods.name().call({}).then(res => {
-                            setWcsTokenName(res)
-                        })
-                        res.methods.symbol().call({}).then(res => {
-                            setWcsTokenSymbol(res)
-                        })
-                        res.methods.balanceOf(web3.eth.defaultAccount).call({ from: web3.eth.defaultAccount })
-                            .then(res => { setBalanceRegWCS(web3.utils.fromWei(res)) })
-
+            try {
+                getContract().then((res) => {
+                    setContract(res)
+                    res.methods.name().call({}).then(res => {
+                        setWcsTokenName(res)
                     })
-                } catch (error) {
-                    console.error(error)
-                }
+                    res.methods.symbol().call({}).then(res => {
+                        setWcsTokenSymbol(res)
+                    })
+                    res.methods.balanceOf(web3.eth.defaultAccount).call({ from: web3.eth.defaultAccount })
+                        .then(res => { setBalanceRegWCS(web3.utils.fromWei(res)) })
+
+                })
+            } catch (error) {
+                console.error(error)
             }
         } else {
             if (input.length < 42) { danger("To small"); setValidationAddress(false) }
@@ -104,7 +103,8 @@ const WcsToken = ({ web3Provider, explorer }) => {
                             if (receipt.status) {
                                 tx.isMined = true
                                 setIsLoading(false)
-                                getBalance()
+                                contract.methods.balanceOf(web3.eth.defaultAccount).call({ from: web3.eth.defaultAccount })
+                                    .then(res => { setBalanceRegWCS(web3.utils.fromWei(res)) })
                                 success("Transaction has been confirmed !", 8000)
                             }
                         })
